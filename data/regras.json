@@ -1,0 +1,53 @@
+{
+  "alertas": {
+    "alergia_tintura": "Você relatou alergia a tintura: não aplicamos coloração com amônia/PPD. Uma profissional vai avaliar alternativas com você.",
+    "pausa_quimica": "Seu cabelo ou sua situação pede cautela com química. Priorize tratamentos de cuidado e confirme com a profissional antes de qualquer procedimento químico.",
+    "gestacao": "Durante a gestação alguns produtos (como os que contêm formol) não são indicados. Converse com seu médico e avise a profissional.",
+    "caspa": "Se a caspa persistir ou houver feridas e coceira intensa, procure um dermatologista."
+  },
+  "regras": [
+    {"id": "R01", "descricao": "Química recente exige cautela com novos procedimentos químicos", "se": [["quimica_recente", "=", "sim"]], "entao": ["restricao_quimica", "sim"], "cf": 0.9},
+    {"id": "R02", "descricao": "Cabelo muito danificado não deve receber química", "se": [["estado_cabelo", "=", "danificado"]], "entao": ["restricao_quimica", "sim"], "cf": 1.0},
+    {"id": "R03", "descricao": "Cabelo quebradiço sugere evitar química", "se": [["estado_cabelo", "=", "quebradico"]], "entao": ["restricao_quimica", "sim"], "cf": 0.8},
+    {"id": "R04", "descricao": "Gestação restringe procedimentos químicos", "se": [["gestante", "=", "sim"]], "entao": ["restricao_quimica", "sim"], "cf": 1.0},
+    {"id": "R05", "descricao": "Cabelo danificado ou quebradiço está fragilizado", "se": [["estado_cabelo", "em", ["danificado", "quebradico"]]], "entao": ["cabelo_fragilizado", "sim"], "cf": 0.95},
+    {"id": "R06", "descricao": "Cabelo ressecado com química recente tende a estar fragilizado", "se": [["estado_cabelo", "=", "ressecado"], ["quimica_recente", "=", "sim"]], "entao": ["cabelo_fragilizado", "sim"], "cf": 0.7},
+    {"id": "R07", "descricao": "Quem não sabe se tem alergia precisa de teste antes da coloração", "se": [["alergia_tintura", "=", "nao_sei"], ["objetivo", "=", "mudar_cor"]], "entao": ["necessita_teste_alergia", "sim"], "cf": 1.0},
+    {"id": "R08", "descricao": "Couro cabeludo sensível pede teste antes de coloração ou alisamento", "se": [["couro_cabeludo", "=", "sensivel"], ["objetivo", "em", ["mudar_cor", "alisar"]]], "entao": ["necessita_teste_alergia", "sim"], "cf": 0.8},
+    {"id": "R09", "descricao": "Alergia declarada contraindica tintura", "se": [["alergia_tintura", "=", "sim"]], "entao": ["contraindicado_tintura", "sim"], "cf": 1.0},
+    {"id": "R10", "descricao": "Clarear cabelo natural ou pintado exige descoloração", "se": [["objetivo", "=", "mudar_cor"], ["cor_desejada", "=", "mais_claro"], ["cor_atual", "em", ["natural", "colorido"]]], "entao": ["precisa_descoloracao", "sim"], "cf": 0.9},
+
+    {"id": "R11", "descricao": "Escurecer o cabelo sem restrições: coloração", "se": [["objetivo", "=", "mudar_cor"], ["cor_desejada", "=", "mais_escuro"], ["contraindicado_tintura", "nao", "sim"], ["restricao_quimica", "nao", "sim"]], "entao": ["recomendacao", "coloracao"], "cf": 0.9},
+    {"id": "R12", "descricao": "Clarear sem restrições: mechas ou luzes", "se": [["objetivo", "=", "mudar_cor"], ["precisa_descoloracao", "=", "sim"], ["contraindicado_tintura", "nao", "sim"], ["restricao_quimica", "nao", "sim"]], "entao": ["recomendacao", "mechas_luzes"], "cf": 0.85},
+    {"id": "R13", "descricao": "Mudar a cor com restrição química: tonalização suave", "se": [["objetivo", "=", "mudar_cor"], ["restricao_quimica", "=", "sim"], ["contraindicado_tintura", "nao", "sim"]], "entao": ["recomendacao", "tonalizacao"], "cf": 0.7},
+    {"id": "R14", "descricao": "Cabelo descolorido que vai escurecer: tonalização", "se": [["objetivo", "=", "mudar_cor"], ["cor_atual", "=", "descolorido"], ["cor_desejada", "=", "mais_escuro"]], "entao": ["recomendacao", "tonalizacao"], "cf": 0.6},
+    {"id": "R15", "descricao": "Quem precisa de teste de alergia deve fazê-lo primeiro", "se": [["necessita_teste_alergia", "=", "sim"]], "entao": ["recomendacao", "teste_alergia"], "cf": 1.0},
+    {"id": "R16", "descricao": "Alerta de alergia para quem quer mudar a cor", "se": [["objetivo", "=", "mudar_cor"], ["contraindicado_tintura", "=", "sim"]], "entao": ["alerta", "alergia_tintura"], "cf": 1.0},
+    {"id": "R17", "descricao": "Alerta de pausa química para coloração ou alisamento", "se": [["objetivo", "em", ["mudar_cor", "alisar"]], ["restricao_quimica", "=", "sim"]], "entao": ["alerta", "pausa_quimica"], "cf": 0.9},
+    {"id": "R18", "descricao": "Alerta de gestação para coloração ou alisamento", "se": [["objetivo", "em", ["mudar_cor", "alisar"]], ["gestante", "=", "sim"]], "entao": ["alerta", "gestacao"], "cf": 1.0},
+
+    {"id": "R19", "descricao": "Alisar cabelo com textura e sem restrição: progressiva", "se": [["objetivo", "=", "alisar"], ["tipo_cabelo", "em", ["ondulado", "cacheado", "crespo"]], ["restricao_quimica", "nao", "sim"]], "entao": ["recomendacao", "progressiva"], "cf": 0.85},
+    {"id": "R20", "descricao": "Alisar com restrição química: botox capilar", "se": [["objetivo", "=", "alisar"], ["restricao_quimica", "=", "sim"]], "entao": ["recomendacao", "botox_capilar"], "cf": 0.7},
+    {"id": "R21", "descricao": "Cabelo já liso: escova resolve", "se": [["objetivo", "=", "alisar"], ["tipo_cabelo", "=", "liso"]], "entao": ["recomendacao", "escova"], "cf": 0.85},
+    {"id": "R22", "descricao": "Reduzir volume em cabelo com textura: botox capilar", "se": [["objetivo", "=", "reduzir_volume"], ["tipo_cabelo", "em", ["ondulado", "cacheado", "crespo"]]], "entao": ["recomendacao", "botox_capilar"], "cf": 0.8},
+    {"id": "R23", "descricao": "Reduzir volume com orçamento baixo: hidratação", "se": [["objetivo", "=", "reduzir_volume"], ["orcamento", "=", "baixo"]], "entao": ["recomendacao", "hidratacao"], "cf": 0.6},
+
+    {"id": "R24", "descricao": "Hidratar cabelo ressecado: hidratação profunda", "se": [["objetivo", "=", "hidratar"], ["estado_cabelo", "=", "ressecado"]], "entao": ["recomendacao", "hidratacao"], "cf": 0.9},
+    {"id": "R25", "descricao": "Manutenção de cabelo saudável: hidratação", "se": [["objetivo", "=", "hidratar"], ["estado_cabelo", "=", "saudavel"]], "entao": ["recomendacao", "hidratacao"], "cf": 0.6},
+    {"id": "R26", "descricao": "Cabelo cacheado ou crespo ressecado precisa de hidratação", "se": [["estado_cabelo", "=", "ressecado"], ["tipo_cabelo", "em", ["cacheado", "crespo"]]], "entao": ["recomendacao", "hidratacao"], "cf": 0.8},
+    {"id": "R27", "descricao": "Cabelo fragilizado: reconstrução capilar", "se": [["cabelo_fragilizado", "=", "sim"]], "entao": ["recomendacao", "reconstrucao_capilar"], "cf": 0.9},
+    {"id": "R28", "descricao": "Quem quer cortar: corte de cabelo", "se": [["objetivo", "=", "cortar"]], "entao": ["recomendacao", "corte"], "cf": 0.9},
+    {"id": "R29", "descricao": "Corte em cabelo quebradiço ou danificado: reconstrução", "se": [["objetivo", "=", "cortar"], ["estado_cabelo", "em", ["quebradico", "danificado"]]], "entao": ["recomendacao", "reconstrucao_capilar"], "cf": 0.7},
+    {"id": "R30", "descricao": "Caspa ou oleosidade: tratamento do couro cabeludo", "se": [["couro_cabeludo", "em", ["caspa", "oleoso"]]], "entao": ["recomendacao", "tratamento_couro_cabeludo"], "cf": 0.85},
+    {"id": "R31", "descricao": "Objetivo de cuidar do couro cabeludo", "se": [["objetivo", "=", "couro_cabeludo"]], "entao": ["recomendacao", "tratamento_couro_cabeludo"], "cf": 0.7},
+    {"id": "R32", "descricao": "Alerta para caspa persistente", "se": [["couro_cabeludo", "=", "caspa"]], "entao": ["alerta", "caspa"], "cf": 0.8},
+
+    {"id": "R33", "descricao": "Evento: penteado para festa", "se": [["objetivo", "=", "evento"]], "entao": ["recomendacao", "penteado_festa"], "cf": 0.9},
+    {"id": "R34", "descricao": "Evento com tempo disponível: maquiagem social", "se": [["objetivo", "=", "evento"], ["tempo", "em", ["medio", "longo"]]], "entao": ["recomendacao", "maquiagem_social"], "cf": 0.7},
+    {"id": "R35", "descricao": "Evento com pouco tempo: escova rápida", "se": [["objetivo", "=", "evento"], ["tempo", "=", "curto"]], "entao": ["recomendacao", "escova"], "cf": 0.7},
+
+    {"id": "R36", "descricao": "Cuidar das unhas: manicure", "se": [["objetivo", "=", "unhas"]], "entao": ["recomendacao", "manicure"], "cf": 0.9},
+    {"id": "R37", "descricao": "Unhas com orçamento médio ou alto: pedicure", "se": [["objetivo", "=", "unhas"], ["orcamento", "em", ["medio", "alto"]]], "entao": ["recomendacao", "pedicure"], "cf": 0.6},
+    {"id": "R38", "descricao": "Unhas com tempo e orçamento: esmaltação em gel", "se": [["objetivo", "=", "unhas"], ["tempo", "em", ["medio", "longo"]], ["orcamento", "em", ["medio", "alto"]]], "entao": ["recomendacao", "esmaltacao_gel"], "cf": 0.8}
+  ]
+}

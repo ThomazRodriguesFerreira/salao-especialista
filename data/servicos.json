@@ -1,0 +1,19 @@
+[
+  {"id": "corte", "nome": "Corte de cabelo", "categoria": "cabelo", "preco": 80, "duracao_min": 60, "profissional": "Cabeleireira", "descricao": "Corte com lavagem e finalização."},
+  {"id": "escova", "nome": "Escova modeladora", "categoria": "cabelo", "preco": 70, "duracao_min": 60, "profissional": "Cabeleireira", "descricao": "Lavagem e escova para alisar ou dar forma aos fios."},
+  {"id": "hidratacao", "nome": "Hidratação profunda", "categoria": "cabelo", "preco": 90, "duracao_min": 60, "profissional": "Cabeleireira", "descricao": "Reposição de água e brilho nos fios."},
+  {"id": "reconstrucao_capilar", "nome": "Reconstrução capilar", "categoria": "cabelo", "preco": 160, "duracao_min": 90, "profissional": "Cabeleireira", "descricao": "Reposição de massa para fios danificados ou quebradiços."},
+  {"id": "coloracao", "nome": "Coloração", "categoria": "cabelo", "preco": 180, "duracao_min": 150, "profissional": "Colorista", "descricao": "Tintura para escurecer ou mudar o tom do cabelo."},
+  {"id": "tonalizacao", "nome": "Tonalização sem amônia", "categoria": "cabelo", "preco": 110, "duracao_min": 60, "profissional": "Colorista", "descricao": "Ajuste de tom mais suave, indicado para fios sensíveis."},
+  {"id": "mechas_luzes", "nome": "Mechas / luzes (descoloração)", "categoria": "cabelo", "preco": 380, "duracao_min": 240, "profissional": "Colorista", "descricao": "Clareamento dos fios com descoloração."},
+  {"id": "progressiva", "nome": "Escova progressiva", "categoria": "cabelo", "preco": 350, "duracao_min": 180, "profissional": "Cabeleireira", "descricao": "Alisamento duradouro para cabelos ondulados, cacheados ou crespos."},
+  {"id": "botox_capilar", "nome": "Botox capilar", "categoria": "cabelo", "preco": 220, "duracao_min": 120, "profissional": "Cabeleireira", "descricao": "Reduz volume e frizz sem alisamento agressivo."},
+  {"id": "tratamento_couro_cabeludo", "nome": "Tratamento do couro cabeludo", "categoria": "cabelo", "preco": 130, "duracao_min": 60, "profissional": "Tricologista", "descricao": "Limpeza e equilíbrio do couro cabeludo (caspa, oleosidade)."},
+  {"id": "penteado_festa", "nome": "Penteado para festa", "categoria": "evento", "preco": 150, "duracao_min": 90, "profissional": "Cabeleireira", "descricao": "Penteado para eventos e ocasiões especiais."},
+  {"id": "maquiagem_social", "nome": "Maquiagem social", "categoria": "evento", "preco": 140, "duracao_min": 60, "profissional": "Maquiadora", "descricao": "Maquiagem para festas e eventos."},
+  {"id": "manicure", "nome": "Manicure", "categoria": "unhas", "preco": 45, "duracao_min": 45, "profissional": "Manicure", "descricao": "Cuidado e esmaltação das unhas das mãos."},
+  {"id": "pedicure", "nome": "Pedicure", "categoria": "unhas", "preco": 55, "duracao_min": 60, "profissional": "Manicure", "descricao": "Cuidado e esmaltação das unhas dos pés."},
+  {"id": "esmaltacao_gel", "nome": "Esmaltação em gel", "categoria": "unhas", "preco": 90, "duracao_min": 75, "profissional": "Manicure", "descricao": "Esmalte em gel de longa duração."},
+  {"id": "teste_alergia", "nome": "Teste de alergia (mecha/pele)", "categoria": "avaliacao", "preco": 0, "duracao_min": 15, "profissional": "Colorista", "descricao": "Teste gratuito em pequena área, feito 48 h antes do procedimento."},
+  {"id": "avaliacao_presencial", "nome": "Avaliação presencial gratuita", "categoria": "avaliacao", "preco": 0, "duracao_min": 20, "profissional": "Cabeleireira", "descricao": "Conversa com uma profissional para definir o melhor procedimento."}
+]
