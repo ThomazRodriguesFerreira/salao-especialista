@@ -1,0 +1,4 @@
+# O núcleo (motor, regras, console) usa apenas a biblioteca padrão do Python 3.10+.
+# Os pacotes abaixo são necessários só para a interface gráfica e para os testes.
+streamlit>=1.40
+pytest>=7.0
