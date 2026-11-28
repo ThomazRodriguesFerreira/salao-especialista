@@ -4,7 +4,7 @@ Protótipo de sistema especialista para um **salão de beleza** (prestação de 
 
 Trabalho da disciplina Programação de Sistemas Especialistas, Universidade Veiga de Almeida.
 
-**Integrantes:** _(preencher com os nomes completos do grupo)_
+**Integrantes:** Thomaz Rodrigues Ferreira, Thiago Antunes Da Silva Guimarães, Luiz Felipe Marques Espindola, João Vitor Bitencourt Rodrigues e Caio Rocha Da Silva.
 
 ## Como rodar
 
